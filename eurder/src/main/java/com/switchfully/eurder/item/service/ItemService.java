@@ -32,4 +32,8 @@ public class ItemService {
     public List<ItemDto> getAllItems() {
         return itemMapper.toDto(itemRepository.getAllItems().stream().toList());
     }
+
+    public boolean checkAvailibility(String itemId, int amount) {
+        return itemRepository.checkAvailibility(itemId, amount);
+    }
 }

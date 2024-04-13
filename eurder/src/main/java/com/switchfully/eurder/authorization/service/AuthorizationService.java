@@ -43,4 +43,6 @@ public class AuthorizationService {
         return userRepository.getUserByEmail(emailPassword.getEmail())
                 .orElseThrow(() -> new NotFoundException("Email in authorization header not found"));
     }
+
+
 }

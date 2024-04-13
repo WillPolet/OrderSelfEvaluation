@@ -28,4 +28,8 @@ public class ItemRepository {
     public Collection<Item> getAllItems() {
         return items.values();
     }
+
+    public boolean checkAvailibility(String itemId, int amount) {
+        return items.get(itemId).getAmount() >= amount;
+    }
 }
