@@ -4,7 +4,7 @@ import java.util.List;
 
 public enum Role {
     CUSTOMER(List.of(Right.ORDER_ITEM)),
-    ADMIN(List.of(Right.CREATE, Right.UPDATE, Right.VIEW_ALL_CUSTOMERS, Right.DETAILS_OF_CUSTOMER));
+    ADMIN(List.of(Right.CREATE_ADMIN, Right.CREATE_ITEM, Right.UPDATE_ITEM, Right.VIEW_ALL_CUSTOMERS, Right.DETAILS_OF_CUSTOMER));
 
     private List<Right> rights;
 

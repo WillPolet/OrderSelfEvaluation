@@ -1,22 +1,26 @@
 package com.switchfully.eurder.user.domain;
 
+import com.switchfully.eurder.user.domain.attributes.Address;
 import com.switchfully.eurder.user.domain.attributes.Right;
 import com.switchfully.eurder.user.domain.attributes.Role;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class User {
     private String id;
     private String firstname;
     private String lastname;
     private String email;
+    private Address address;
     private String password;
     private Role role;
 
-    public User(String id, String firstname, String lastname, String email, String password, Role role) {
-        this.id = id;
+    public User(String firstname, String lastname, Address address, String email, String password, Role role) {
+        this.id = UUID.randomUUID().toString();
         this.firstname = firstname;
         this.lastname = lastname;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -40,6 +44,10 @@ public class User {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public String getEmail() {
