@@ -11,6 +11,8 @@ public class User {
     private String id;
     private String firstname;
     private String lastname;
+
+//    private Name name; That regroup fristName / lastName for example.
     private String email;
     private Address address;
     private String password;
@@ -25,7 +27,7 @@ public class User {
         this.password = password;
         this.role = role;
     }
-
+    // We must do a method inside the Role Enum this.role.contains(right);
     public boolean hasRight(Right right){
         return this.role.getRights().contains(right);
     }
@@ -75,3 +77,5 @@ public class User {
         return Objects.hash(id, firstname, lastname, email, password, role);
     }
 }
+
+

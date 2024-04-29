@@ -18,19 +18,19 @@ public class UserService {
     }
 
     public UserDto createCustomerUser(CreateUserDto createUserDto) {
-        if (userRepository.emailExist(createUserDto.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
-        }
-        User user = userMapper.fromDto(createUserDto, Role.CUSTOMER);
-        userRepository.saveUser(user);
-        return userMapper.toDto(user);
+        return createUser(createUserDto, Role.CUSTOMER);
     }
 
+    // ctrl alt m (for method and intelliJ saw the duplication)
     public UserDto createAdminUser(CreateUserDto createUserDto) {
+        return createUser(createUserDto, Role.ADMIN);
+    }
+
+    private UserDto createUser(CreateUserDto createUserDto, Role customer) {
         if (userRepository.emailExist(createUserDto.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
-        User user = userMapper.fromDto(createUserDto, Role.ADMIN);
+        User user = userMapper.fromDto(createUserDto, customer);
         userRepository.saveUser(user);
         return userMapper.toDto(user);
     }

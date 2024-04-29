@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class ItemGroup {
+    //Maybe add a field to say if it has been ordered to keep a track of itemGroup ordrered in DB ?
     ItemService itemService;
 
     private String itemGroupId;
@@ -16,16 +17,19 @@ public class ItemGroup {
 
     private LocalDate shippingDate;
 
+    private boolean ordered;
+
     public ItemGroup(String itemId, int amount, String customerId) {
         this.itemGroupId = UUID.randomUUID().toString();
         this.itemId = itemId;
         this.amount = amount;
         this.customerId = customerId;
-        if (availibility()){
+        if (availability()){
             this.shippingDate = LocalDate.now().plusDays(1);
         } else {
             this.shippingDate = LocalDate.now().plusDays(7);
         }
+        this.ordered = false;
     }
 
     public String getItemGroupId() {
@@ -47,7 +51,15 @@ public class ItemGroup {
         return customerId;
     }
 
-    private boolean availibility(){
+    private boolean availability(){
         return itemService.checkAvailibility(itemId, amount);
+    }
+
+    public String getId() {
+        return itemGroupId;
+    }
+
+    public boolean isOrdered() {
+        return ordered;
     }
 }
