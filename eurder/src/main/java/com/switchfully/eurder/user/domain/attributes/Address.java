@@ -1,10 +1,19 @@
 package com.switchfully.eurder.user.domain.attributes;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
+import java.util.UUID;
 
+@Entity
+@Table(name = "address")
 public class Address {
+    @Id
+    @Column(name = "address_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+    @Column
     private String streetName;
     private String streetNumber;
     private String zipCode;

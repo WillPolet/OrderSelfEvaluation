@@ -1,24 +1,38 @@
 package com.switchfully.eurder.item.domain;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.util.Objects;
 import java.util.UUID;
-
+@Entity
+@Table(name = "item")
+@Getter
 public class Item {
-    private final String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "item_id")
+    private UUID id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "price")
     private double price;
-    private int amount;
+    @Column(name = "stock")
+    private int stock;
 
-    public Item(String name, String description, double price, int amount) {
-        this.id = UUID.randomUUID().toString();
+    public Item(String name, String description, double price, int stock) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.amount = amount;
+        this.stock = stock;
     }
 
-    public String getId() {
+    public Item() {
+    }
+
+    public UUID getId() {
         return id;
     }
 
@@ -34,8 +48,8 @@ public class Item {
         return price;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getStock() {
+        return stock;
     }
 
     @Override
@@ -43,11 +57,11 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Double.compare(price, item.price) == 0 && amount == item.amount && Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(description, item.description);
+        return Double.compare(price, item.price) == 0 && stock == item.stock && Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(description, item.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, amount);
+        return Objects.hash(id, name, description, price, stock);
     }
 }

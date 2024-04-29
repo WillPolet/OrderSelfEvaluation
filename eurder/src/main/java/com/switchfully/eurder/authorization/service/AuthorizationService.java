@@ -3,23 +3,25 @@ package com.switchfully.eurder.authorization.service;
 import com.switchfully.eurder.exception.AccessForbiddenException;
 import com.switchfully.eurder.exception.NotFoundException;
 import com.switchfully.eurder.exception.PasswordNotMatchException;
-import com.switchfully.eurder.user.domain.User;
-import com.switchfully.eurder.user.domain.UserRepository;
+import com.switchfully.eurder.user.domain.*;
 import com.switchfully.eurder.user.domain.attributes.EmailPassword;
-import com.switchfully.eurder.user.domain.attributes.Right;
+import com.switchfully.eurder.user.domain.attributes.Role;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 
 @Service
 public class AuthorizationService {
-    UserRepository userRepository;
+    CustomerRepository customerRepository;
 
-    public AuthorizationService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    AdminRepository adminRepository;
+
+    public AuthorizationService(CustomerRepository customerRepository, AdminRepository adminRepository) {
+        this.customerRepository = customerRepository;
+        this.adminRepository = adminRepository;
     }
 
-    public void hasRight(Right right, String authorization){
+    public void hasRole(Role role, String authorization){
         EmailPassword emailPassword = getEmailPassword(authorization);
         User user = getUserByEmailPassword(emailPassword);
 
@@ -27,7 +29,10 @@ public class AuthorizationService {
             throw new PasswordNotMatchException("Email/password in authorization header doesn't match");
         }
 
-        if (!user.hasRight(right)) {
+        if (user instanceof Customer && role == Role.ADMIN){
+            throw new AccessForbiddenException("Authenticated user have no access to this feature");
+        }
+        if (user instanceof Admin && role == Role.CUSTOMER){
             throw new AccessForbiddenException("Authenticated user have no access to this feature");
         }
     }
@@ -40,8 +45,13 @@ public class AuthorizationService {
     }
 
     private User getUserByEmailPassword(EmailPassword emailPassword) {
-        return userRepository.getUserByEmail(emailPassword.getEmail())
-                .orElseThrow(() -> new NotFoundException("Email in authorization header not found"));
+        if (customerRepository.findByEmail(emailPassword.getEmail()).isPresent()) {
+            return customerRepository.findByEmail(emailPassword.getEmail()).get();
+        } else if (adminRepository.findByEmail(emailPassword.getEmail()).isPresent()) {
+            return adminRepository.findByEmail(emailPassword.getEmail()).get();
+        } else {
+            throw new NotFoundException("Email in authorization header not found");
+        }
     }
 
 

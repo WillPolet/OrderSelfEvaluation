@@ -1,6 +1,6 @@
 package com.switchfully.eurder.user.domain.attributes;
 
-public enum Right {
+public enum Rights {
     CREATE_ADMIN,
     CREATE_ITEM,
     UPDATE_ITEM,

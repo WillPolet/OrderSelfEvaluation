@@ -1,65 +1,42 @@
 package com.switchfully.eurder.itemGroup.domain;
 
-import com.switchfully.eurder.item.service.ItemService;
+import com.switchfully.eurder.Eurder.Eurder;
+import com.switchfully.eurder.item.domain.Item;
+import com.switchfully.eurder.item.domain.ItemCopy;
+import com.switchfully.eurder.user.domain.Customer;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.UUID;
-
+@Entity
+@Table(name = "item_group")
+@Getter
 public class ItemGroup {
-    //Maybe add a field to say if it has been ordered to keep a track of itemGroup ordrered in DB ?
-    ItemService itemService;
-
-    private String itemGroupId;
-    private String itemId;
+    @Id
+    @Column(name = "item_group_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+    @Embedded
+    private ItemCopy itemCopy;            ;
     private int amount;
-
-    private String customerId;
-
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "customer_id", name = "customer")
+    private Customer customer;
+    @Column(name = "shipping_date")
     private LocalDate shippingDate;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "eurder_id",name = "associatedOrder")
+    private Eurder eurder;
 
-    private boolean ordered;
-
-    public ItemGroup(String itemId, int amount, String customerId) {
-        this.itemGroupId = UUID.randomUUID().toString();
-        this.itemId = itemId;
+    public ItemGroup(ItemCopy itemCopy, int amount, Customer customer, LocalDate shippingDate) {
+        this.itemCopy = itemCopy;
         this.amount = amount;
-        this.customerId = customerId;
-        if (availability()){
-            this.shippingDate = LocalDate.now().plusDays(1);
-        } else {
-            this.shippingDate = LocalDate.now().plusDays(7);
-        }
-        this.ordered = false;
+        this.customer = customer;
+        this.shippingDate = shippingDate;
     }
 
-    public String getItemGroupId() {
-        return itemGroupId;
-    }
-    public String getItemId() {
-        return itemId;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public LocalDate getShippingDate() {
-        return shippingDate;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    private boolean availability(){
-        return itemService.checkAvailibility(itemId, amount);
-    }
-
-    public String getId() {
-        return itemGroupId;
-    }
-
-    public boolean isOrdered() {
-        return ordered;
+    public ItemGroup() {
     }
 }
