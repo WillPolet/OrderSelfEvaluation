@@ -1,4 +1,4 @@
-package com.switchfully.eurder.Eurder;
+package com.switchfully.eurder.Eurder.domain;
 
 import com.switchfully.eurder.itemGroup.domain.ItemGroup;
 import com.switchfully.eurder.user.domain.Customer;
@@ -20,8 +20,7 @@ public class Eurder {
     @JoinColumn(referencedColumnName = "customer_id")
     private Customer customer;
 
-    public Eurder(UUID eurderId, Customer customer) {
-        this.eurderId = eurderId;
+    public Eurder(Customer customer) {
         this.customer = customer;
     }
 

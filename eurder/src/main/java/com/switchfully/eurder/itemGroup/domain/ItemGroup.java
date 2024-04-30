@@ -1,15 +1,13 @@
 package com.switchfully.eurder.itemGroup.domain;
 
-import com.switchfully.eurder.Eurder.Eurder;
-import com.switchfully.eurder.item.domain.Item;
+import com.switchfully.eurder.Eurder.domain.Eurder;
 import com.switchfully.eurder.item.domain.ItemCopy;
 import com.switchfully.eurder.user.domain.Customer;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.UUID;
+
 @Entity
 @Table(name = "item_group")
 @Getter

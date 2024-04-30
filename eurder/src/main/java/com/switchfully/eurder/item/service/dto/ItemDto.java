@@ -1,7 +1,9 @@
 package com.switchfully.eurder.item.service.dto;
 
+import java.util.UUID;
+
 public class ItemDto {
-    private String id;
+    private UUID id;
     private String name;
     private String description;
     private double price;
@@ -10,7 +12,7 @@ public class ItemDto {
     public ItemDto() {
     }
 
-    public ItemDto(String id, String name, String description, double price, int amount) {
+    public ItemDto(UUID id, String name, String description, double price, int amount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,7 +20,7 @@ public class ItemDto {
         this.amount = amount;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 

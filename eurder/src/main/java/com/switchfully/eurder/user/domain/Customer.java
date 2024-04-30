@@ -22,7 +22,7 @@ public class Customer implements User {
     private String lastname;
     @Column(name = "email")
     private String email;
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "address_id", name = "address")
     private Address address;
     @Column(name = "password")

@@ -3,25 +3,27 @@ package com.switchfully.eurder.user.service.dto;
 import com.switchfully.eurder.user.domain.attributes.Address;
 import com.switchfully.eurder.user.domain.attributes.Role;
 
-public class UserDto {
-    private String id;
+import java.util.UUID;
+
+public class CustomerDto {
+    private UUID id;
     private String firstname;
     private String lastname;
 
     private Address address;
     private String email;
-    private Role role;
+    private String phoneNumber;
 
-    public UserDto(String id, String firstname, String lastname, Address address, String email, Role role) {
+    public CustomerDto(UUID id, String firstname, String lastname, Address address, String email, String phoneNumber) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.email = email;
-        this.role = role;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -41,7 +43,7 @@ public class UserDto {
         return email;
     }
 
-    public Role getRole() {
-        return role;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

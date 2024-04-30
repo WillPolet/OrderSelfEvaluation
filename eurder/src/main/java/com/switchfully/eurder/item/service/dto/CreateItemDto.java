@@ -1,15 +1,16 @@
 package com.switchfully.eurder.item.service.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateItemDto {
     @NotEmpty(message = "Name is required for creation ot Item.")
     private String name;
     @NotEmpty(message = "Description is required for creation ot Item.")
     private String description;
-    @NotEmpty(message = "Price is required for creation ot Item.")
+    @NotNull(message = "Price is required for creation ot Item.")
     private double price;
-    @NotEmpty(message = "Amount is required for creation ot Item.")
+    @NotNull(message = "Amount is required for creation ot Item.")
     private int amount;
 
     public CreateItemDto() {

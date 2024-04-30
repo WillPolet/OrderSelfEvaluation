@@ -54,5 +54,10 @@ public class AuthorizationService {
         }
     }
 
+    public User returnUserConnected(String authorization){
+        EmailPassword emailPassword = getEmailPassword(authorization);
+        return getUserByEmailPassword(emailPassword);
+    }
+
 
 }
