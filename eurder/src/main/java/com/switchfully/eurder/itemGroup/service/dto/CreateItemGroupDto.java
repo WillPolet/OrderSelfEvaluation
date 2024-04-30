@@ -1,11 +1,12 @@
 package com.switchfully.eurder.itemGroup.service.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class CreateItemGroupDto {
     @NotEmpty(message = "Item id of item is required for creation of ItemGroup.")
     private String itemId;
-    @NotEmpty(message = "Amount is required for creation of ItemGroup.")
+    @NotNull(message = "Amount is required for creation of ItemGroup.")
     private int amount;
 
 

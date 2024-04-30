@@ -40,6 +40,10 @@ public class ItemService {
         return itemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Item with id " + itemId + " not found."));
     }
 
+    public double getPriceById(UUID itemId) {
+        return itemRepository.getPriceById(itemId);
+    }
+
 //    public boolean checkAvailibility(String itemId, int amount) {
 //        return itemRepository.checkAvailibility(itemId, amount);
 //    }

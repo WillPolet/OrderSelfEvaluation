@@ -1,13 +1,16 @@
 package com.switchfully.eurder.itemGroup.service.dto;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 public class ItemGroupDto {
     private String itemGroupId;
-    private String itemId;
+    private UUID itemId;
     private int amount;
-    private String customerId;
-    private String shippingDate;
+    private UUID customerId;
+    private LocalDate shippingDate;
 
-    public ItemGroupDto(String itemGroupId, String itemId, int amount, String customerId, String shippingDate) {
+    public ItemGroupDto(String itemGroupId, UUID itemId, int amount, UUID customerId, LocalDate shippingDate) {
         this.itemGroupId = itemGroupId;
         this.itemId = itemId;
         this.amount = amount;
@@ -18,7 +21,7 @@ public class ItemGroupDto {
     public String getItemGroupId() {
         return itemGroupId;
     }
-    public String getItemId() {
+    public UUID getItemId() {
         return itemId;
     }
 
@@ -26,11 +29,11 @@ public class ItemGroupDto {
         return amount;
     }
 
-    public String getCustomerId() {
+    public UUID getCustomerId() {
         return customerId;
     }
 
-    public String getShippingDate() {
+    public LocalDate getShippingDate() {
         return shippingDate;
     }
 }

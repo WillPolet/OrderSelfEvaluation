@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "item_group")
@@ -36,5 +37,13 @@ public class ItemGroup {
     }
 
     public ItemGroup() {
+    }
+
+    public UUID getIdOfItem(){
+        return this.itemCopy.getOrignalItem().getId();
+    }
+
+    public UUID getCustomerId(){
+        return this.customer.getId();
     }
 }
