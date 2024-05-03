@@ -10,6 +10,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -26,5 +29,15 @@ public class UserController {
     @PostMapping()
     public CustomerDto createUser(@RequestBody @Valid CreateCustomerDto createUserDto){return userService.createCustomerUser(createUserDto);}
 
+    @GetMapping()
+    public List<CustomerDto> getAllUsers(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization){
+        authorizationService.hasRole(Role.ADMIN, authorization);
+        return userService.getAllCustomers();
+    }
 
+    @GetMapping(path = "/{id}")
+    public CustomerDto getUserById(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization, @PathVariable UUID id){
+        authorizationService.hasRole(Role.ADMIN, authorization);
+        return userService.getCustomerById(id);
+    }
 }

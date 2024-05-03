@@ -18,7 +18,7 @@ public class ItemGroup {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Embedded
-    private ItemCopy itemCopy;            ;
+    private ItemCopy itemCopy;           ;
     private int amount;
     @ManyToOne
     @JoinColumn(referencedColumnName = "customer_id", name = "customer")
@@ -29,11 +29,12 @@ public class ItemGroup {
     @JoinColumn(referencedColumnName = "eurder_id",name = "associatedOrder")
     private Eurder eurder;
 
-    public ItemGroup(ItemCopy itemCopy, int amount, Customer customer, LocalDate shippingDate) {
+    public ItemGroup(ItemCopy itemCopy, int amount, Customer customer, LocalDate shippingDate, Eurder eurder) {
         this.itemCopy = itemCopy;
         this.amount = amount;
         this.customer = customer;
         this.shippingDate = shippingDate;
+        this.eurder = eurder;
     }
 
     public ItemGroup() {

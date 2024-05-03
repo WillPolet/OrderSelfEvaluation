@@ -16,6 +16,9 @@ public class CreateEurderDto {
         this.listOfItemGroup = listOfItemGroup;
     }
 
+    public CreateEurderDto() {
+    }
+
     @Override
     public String toString() {
         return "CreateEurderDto{" +

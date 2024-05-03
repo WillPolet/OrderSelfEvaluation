@@ -1,6 +1,7 @@
 package com.switchfully.eurder.item.service;
 
 import com.switchfully.eurder.exception.ItemAlreadyExistException;
+import com.switchfully.eurder.exception.NotFoundException;
 import com.switchfully.eurder.item.domain.Item;
 import com.switchfully.eurder.item.domain.ItemRepository;
 import com.switchfully.eurder.item.service.dto.CreateItemDto;
@@ -37,7 +38,7 @@ public class ItemService {
     }
 
     public Item findItemById(UUID itemId) {
-        return itemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("Item with id " + itemId + " not found."));
+        return itemRepository.findById(itemId).orElseThrow(() -> new NotFoundException("Item with id " + itemId + " not found."));
     }
 
     public double getPriceById(UUID itemId) {

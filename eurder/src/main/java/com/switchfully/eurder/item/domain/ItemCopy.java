@@ -11,6 +11,7 @@ import java.util.UUID;
 @Getter
 public class ItemCopy {
     @ManyToOne
+    @JoinColumn(name = "original_item")
     private Item orignalItem;
     private String name;
     private double price;

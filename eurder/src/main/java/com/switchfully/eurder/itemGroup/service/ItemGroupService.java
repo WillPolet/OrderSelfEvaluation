@@ -40,7 +40,7 @@ public class ItemGroupService {
                     LocalDate dateOfShipping = (item.getStock() - createItemGroupDto.getAmount() >= 0)
                             ? LocalDate.now().plusDays(1)
                             : LocalDate.now().plusWeeks(1);
-                    ItemGroup itemGroup = new ItemGroup(itemCopy, createItemGroupDto.getAmount(), customer, dateOfShipping);
+                    ItemGroup itemGroup = new ItemGroup(itemCopy, createItemGroupDto.getAmount(), customer, dateOfShipping, eurder);
                     itemGroupRepository.save(itemGroup);
                     return itemGroupMapper.toDto(itemGroup);
                 })
